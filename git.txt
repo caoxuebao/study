@@ -1,0 +1,130 @@
+﻿ssh-keygen -t rsa -C "you email address"  -> 一直enter
+在C:\Users\Administrator\.ssh中找到
+	id_rsa		  私钥
+	id_rsa.pub    公钥
+将id_rsa.pub中内容复制到github账号中的SSH and GPG keys中
+
+验证是否连接成功
+终端：ssh -T git@github.com
+
+如果连接错误： 链接超时，端口22
+知道git的安装路径  D:\File\Git_File\install\etc\ssh\ 下的 ssh_config 在文件最后添加如下：
+Host github.com
+User git
+Hostname ssh.github.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_rsa
+Port 443
+
+在重新执行ssh -T git@github.com 
+$ ssh -T git@github.com
+The authenticity of host '[ssh.github.com]:443 ([192.30.253.122]:443)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '[ssh.github.com]:443,[192.30.253.122]:443' (RSA) to the list of known hosts.
+Hi caoxuebao! You've successfully authenticated, but GitHub does not provide shell access.
+
+ok
+
+
+设置用户名和密码：
+git config --global user.email "you email"
+git config --global user.name "you name"
+
+
+
+github上克隆项目到本地
+git clone git_url
+
+初始化本地仓库
+git init
+
+将所在目录下的所有文件添加或者添加置顶文件
+git add . | git add x.txt
+
+提交代码以及注释
+git commit -m "you description"
+
+提交代码到远程仓库
+git push -u origin master 
+
+注意： 
+添加本地项目到远程仓库
+git remote add origin "you github 仓库名称"  【不存在github上,存在于本地】
+
+git init
+git add .
+git commit -m "you description"
+git remote add origin "you github 仓库名称"
+git pull origin master 首次提交要git pull一下
+git push -u origin master
+如果报错:failed to push some refs to git...
+执行git pull --rebase origin master
+在执行git push -u origin master
+
+
+git常用命令：
+git status  	查看状态
+git rm 文件名 	停止跟踪文件并删除文件
+git rm -f 文件名  停止跟踪并删除已修改且添加到暂存区的文件
+git diff --cached 显示已经放到暂存区的文件的修改
+git mv old-name   new-name
+git rm --cached 文件名   停止跟踪但不删除文件
+git diff --cached 显示已经放到暂存区的文件的修改
+
+git branch -r   显示当前仓库的所有远程分支
+git branch -a   显示当前仓库的所有分支【本地和远程】
+git branch 分支名称   创建本地分支
+git checkout 分支名称  切换到某个分支
+git checkout -b <name>  创建+切换分支
+
+git merge 分支名称
+注:假如要把分支mk 合并到master上， 首先切换分支到master，然后执行 git merge mk
+git branch -d 被合并的分支名称  删除已经被合并的分支名称
+
+git branch -D 分支名称  删除没有被合并的分支名称
+
+git log  查看日志
+
+
+查看当前配置的远程仓库[和对应的地址]
+git remote [-v] 
+
+添加远程仓库
+git remote add origin 仓库名称
+
+从远程仓库抓取数据
+git fetch [remote-name] [branch-name]
+git fetch origin master
+
+推送数据到远程仓库
+git push [remote-name] [branch-name]
+git push origin master
+
+
+重命名远程仓库
+git remote rename [old-name] [new-name]
+
+删除某个远程仓库
+git remote rm [remote-name]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
